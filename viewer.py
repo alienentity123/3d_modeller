@@ -5,6 +5,11 @@ import sys
 import numpy 
 from OpenGL.GLU import * 
 
+from scipy.linalg import inv
+from scene import Scene
+from node import Cube, Sphere, SnowFigure, Interaction
+
+
 class Viewer(object):
     def __init__(self):
         """initialize the viewer"""
@@ -120,10 +125,7 @@ class Viewer(object):
         gluPerspective(70, aspect_ratio, 0.1, 1000.0)
         glTranslate(0, 0, -15)
 
-
-
-
-
 if __name__ == "__main__":
     viewer = Viewer()
     viewer.main_loop()
+
