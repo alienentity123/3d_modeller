@@ -37,3 +37,18 @@ class Scene(object):
             self.selected_node.select(False)
             self.selected_node = None
              
+        # keep track of the closest hit 
+        mindist = sys.maxint 
+        closest_node = None 
+        for node in self.node_list:
+            hit, dist = node.pick(start, direction, mat)
+            if hit and dist < mindist:
+                mindist, closest_node = dist, node
+        
+        # if we hit comething, keep track of it 
+        if closest_node is not None:
+            closest_node.select()
+            closest_node.depth = mindist 
+            closest_node.select_loc = start + direction * mindist 
+            self.selected_node = closest_node
+

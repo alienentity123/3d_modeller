@@ -64,6 +64,29 @@ class Node(object):
     def render_self(self):
         raise NotImplementedError("The Abstract Node Class does not define 'render self'")
     
+    def pick(self, start, direction, mat):
+        """
+        return whether or not the ray hits the object 
+
+        consume:
+        start, direction form the ray to check mat is the modelview matrix to transfoem ray by
+        """
+
+        #transform the modelview matrix by the current translation
+        newmat = numpy.dot(
+            numpy.dot(mat, self.translation_matrix),
+            numpy.linalg.inv(self.scaling_matrix)
+        )
+        results = self.aabb.ray_hit(start, direction, newmat)
+        return results 
+    
+    def select(self, select = None):
+        """toggles or sets selected state"""
+        if select is not None:
+            self.selected = select
+        else: 
+            self.selected = not self.selected
+
 # primitive nodes 
 class Primitive(Node):
 
