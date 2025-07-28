@@ -25,3 +25,15 @@ class Scene(object):
         """render the scene"""
         for node in self.nde_list:
             node.render()
+
+    def pick(self, start, direction, mat):
+        """
+        exccute selection 
+        start, direction decribes a ray 
+        mat is the inverse of the current modelview matrix for the scene
+        """
+
+        if self.selected_node is not None:
+            self.selected_node.select(False)
+            self.selected_node = None
+             

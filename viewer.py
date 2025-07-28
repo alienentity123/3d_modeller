@@ -125,6 +125,33 @@ class Viewer(object):
         gluPerspective(70, aspect_ratio, 0.1, 1000.0)
         glTranslate(0, 0, -15)
 
+    def get_ray(self, x, y):
+        """generate a ray beginning at the near plane, in the direction that the x, y 
+        coordinates are facing.
+        
+        Consumes: x, y coordinates of the mouse on screen 
+        Returns: start, direction of the ray
+        """
+        self.init__view()
+
+        glMatrixMode(GL_MODELVIEW)
+        glLoadIdentity()
+
+        # get 2 start points on the line
+        start = numpy.array(gluUnProject(x, y, 0.001))
+        end = numpy.array(gluUnProject(x, y, 0.999))
+
+        # conver those points into a ray 
+        direct = end - start 
+        direct = direct / norm(direct)
+
+        return (start, direct)
+    
+    def pick(self, x, y):
+        """execute pick of an object. selects an object in the scene"""
+        start, direction = self.get_ray(x,y)
+        self.scene.pick(start, direction, self.modelView)
+
 if __name__ == "__main__":
     viewer = Viewer()
     viewer.main_loop()
