@@ -52,3 +52,8 @@ class Scene(object):
             closest_node.select_loc = start + direction * mindist 
             self.selected_node = closest_node
 
+    def rotate_selected_color(self, forwards):
+        """ Rotate the color of the currently selected node """
+        if self.selected_node is None: return
+        self.selected_node.rotate_color(forwards)
+
