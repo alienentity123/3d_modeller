@@ -157,12 +157,16 @@ class Viewer(object):
         start, direction = self.get_ray(x, y)
         self.scene.move_selected(start, direction, self.inverseModelView)
 
-def rotate_color(self, forward):
+    def rotate_color(self, forward):
         """ 
         Rotate the color of the selected Node. 
         Boolean 'forward' indicates direction of rotation. 
         """
         self.scene.rotate_selected_color(forward)
+
+    def scale(self, up):
+        """ Scale the selected Node. Boolean up indicates scaling larger."""
+        self.scene.scale_selected(up)
 
 if __name__ == "__main__":
     viewer = Viewer()
