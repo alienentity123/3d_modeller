@@ -150,7 +150,14 @@ class Viewer(object):
     def pick(self, x, y):
         """execute pick of an object. selects an object in the scene"""
         start, direction = self.get_ray(x,y)
-        self.scene.pick(start, direction, self.modelView)
+        self.scene.pick(start, direction, self.modelView )
+
+    def move(self, x, y):
+        """ Execute a move command on the scene. """
+        start, direction = self.get_ray(x, y)
+        self.scene.move_selected(start, direction, self.inverseModelView)
+
+    
 
 if __name__ == "__main__":
     viewer = Viewer()
