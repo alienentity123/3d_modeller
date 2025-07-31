@@ -94,6 +94,11 @@ class Node(object):
         if self.color_index < color.MIN_COLOR:
             self.color_index = color.MAX_COLOR
 
+    def scale(self, up):
+        s = 1.1 if up else 0.9
+        self.scaling_matrix = numpy.dot(self.scaling_matrix)
+        self.aabb.scale(s)
+
 # primitive nodes 
 class Primitive(Node):
 
