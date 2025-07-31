@@ -87,6 +87,13 @@ class Node(object):
         else: 
             self.selected = not self.selected
 
+    def rotate_color(self, forwards):
+        self.color_index += 1 if forwards else -1 
+        if self.coor_index > color.MAX_COLOR:
+            self.color_index = color.MIN_COLOR
+        if self.color_index < color.MIN_COLOR:
+            self.color_index = color.MAX_COLOR
+
 # primitive nodes 
 class Primitive(Node):
 
