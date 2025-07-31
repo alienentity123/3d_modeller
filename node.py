@@ -96,8 +96,17 @@ class Node(object):
 
     def scale(self, up):
         s = 1.1 if up else 0.9
-        self.scaling_matrix = numpy.dot(self.scaling_matrix)
+        self.scaling_matrix = numpy.dot(self.scaling_matrix, scaling([s, s, s]))
         self.aabb.scale(s)
+    
+def scaling(scale):
+    s = numpy.identity(4)
+    s[0, 0] = scale[0]
+    s[1, 1] = scale[1]
+    s[2, 2] = scale[2]
+    s[3, 3] = 1
+    return s
+
 
 # primitive nodes 
 class Primitive(Node):
