@@ -5,6 +5,8 @@ import sys
 import numpy 
 from OpenGL.GLU import * 
 
+from node import Sphere, Cube, SnowFigure
+
 class Scene(object):
 
     #the default depth from the camera to place an object at 
@@ -63,7 +65,7 @@ class Scene(object):
             return 
         self.selected_node.scale(up)
 
-    def place(self, shape, start, direction, inv_modelview)
+    def place(self, shape, start, direction, inv_modelview):
         """
         place a new node 
 
@@ -74,5 +76,17 @@ class Scene(object):
         """
 
         new_node = None 
-        if shape == 'sphere': new_node = Sphere()
+        if shape == 'sphere': 
+            new_node = Sphere()
+        elif shape == 'cube': 
+            new_node = Cube()
+        elif shape == 'figure':
+            new_node = SnowFigure()
 
+        self.add_node(new_node)
+
+        #place the node at the cursor in the camera space 
+        translate = (start + direction * self.PLACE_DEPTH)
+
+        # convert the translation to world space 
+        pre_tran = numpy.array([translate[0], translate[1], translate[2], 1])
