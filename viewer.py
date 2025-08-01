@@ -168,6 +168,11 @@ class Viewer(object):
         """ Scale the selected Node. Boolean up indicates scaling larger."""
         self.scene.scale_selected(up)
 
+    def place(self, shape, x, y):
+        """execute a placement of a primitive into the scene """
+        start, direction  = self.get_ray(x, y)
+        self.scene.place(shape, start, direction, self.inverseModelView )
+
 if __name__ == "__main__":
     viewer = Viewer()
     viewer.main_loop()

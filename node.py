@@ -265,4 +265,6 @@ class Interaction(object):
     def trigger(self, name, *args, **kwargs):
         for func in self.callbacks[name]:
             func(*args, **kwargs)
+
+    
     
