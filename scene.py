@@ -90,3 +90,6 @@ class Scene(object):
 
         # convert the translation to world space 
         pre_tran = numpy.array([translate[0], translate[1], translate[2], 1])
+        translate = inv_modelview.dot(pre_tran)
+
+        new_node.translate(translate[0], translate[1], translate[2])
