@@ -63,3 +63,16 @@ class Scene(object):
             return 
         self.selected_node.scale(up)
 
+    def place(self, shape, start, direction, inv_modelview)
+        """
+        place a new node 
+
+        consume: 
+        shape the shape to add 
+        start, direction describes the ray to move to 
+        inv_model_view is the inverse model view matrix for the scene 
+        """
+
+        new_node = None 
+        if shape == 'sphere': new_node = Sphere()
+
